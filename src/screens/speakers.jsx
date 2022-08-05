@@ -15,7 +15,7 @@ import Text from "../components/text/text";
 import { fetchProducts, selectSpeakers } from "../store/productSlice";
 import { spacing } from "../themes/spacing";
 
-export default function Speakers() {
+export default function Speakers({ navigation }) {
   const dispatch = useDispatch();
   const speakers = useSelector(selectSpeakers);
   // console.log("sp", speakers);
@@ -26,7 +26,7 @@ export default function Speakers() {
   }, []);
 
   const onPressProduct = (id) => {
-    NavigationPreloadManager.navigate("Details", { id: id });
+    navigation.navigate("Details", { id: id });
   };
 
   return (

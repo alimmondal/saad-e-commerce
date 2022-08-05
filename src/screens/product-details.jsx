@@ -12,6 +12,7 @@ import { spacing } from "../themes/spacing";
 export default function Details({ navigation, route }) {
   const id = route.params.id;
   const product = useSelector((state) => selectProductById(state, id));
+  console.log("pd", product);
   const {
     featuredImage,
     name,
@@ -34,12 +35,12 @@ export default function Details({ navigation, route }) {
       <ScrollView>
         <BannerTitle />
         <Pressable onPress={() => navigation.goBack()}>
-          <Ionicons
+          {/* <Ionicons
             name="arrow-back-sharp"
             size={24}
             color="black"
             style={{ margin: spacing[5] }}
-          />
+          /> */}
         </Pressable>
         <View style={{ margin: spacing[5] }}>
           <View

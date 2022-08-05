@@ -15,7 +15,7 @@ import Text from "../components/text/text";
 import { fetchProducts, selectHeadphones } from "../store/productSlice";
 import { spacing } from "../themes/spacing";
 
-export default function Headphone() {
+export default function Headphone({ navigation }) {
   const dispatch = useDispatch();
   const headphones = useSelector(selectHeadphones);
   // console.log("hp", headphones);
@@ -75,7 +75,7 @@ export default function Headphone() {
                   marginTop: spacing[4],
                 }}
                 title="SEE PRODUCT"
-                onPress={() => onPressProduct(headphones.id)}
+                onPress={() => onPressProduct(headphone.id)}
               />
             </View>
           );

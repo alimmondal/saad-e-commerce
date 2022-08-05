@@ -15,7 +15,7 @@ import Text from "../components/text/text";
 import { fetchProducts, selectEarphone } from "../store/productSlice";
 import { spacing } from "../themes/spacing";
 
-export default function Earphone() {
+export default function Earphone({ navigation }) {
   const dispatch = useDispatch();
   // const status = useSelector(selectStatus);
   const earphones = useSelector(selectEarphone);
@@ -27,7 +27,7 @@ export default function Earphone() {
   }, []);
 
   const onPressProduct = (id) => {
-    NavigationPreloadManager.navigate("Details", { id: id });
+    navigation.navigate("Details", { id: id });
   };
 
   return (
