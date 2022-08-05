@@ -1,8 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { PRODUCT_IMAGE_MAP } from '../data/product-image-map';
-
+import { DATA, PRODUCT_IMAGE_MAP } from "../data/product-image-map";
 const initialState = {
-  products: [],
+  products: DATA,
   status: 'idle',
   error: null,
 }
@@ -24,7 +23,6 @@ export const productSlice = createSlice({
     },
     [fetchProducts.fulfilled]: (state, action) => {
       const { payload } = action;
-      
       payload.products.forEach((product) => {
         product.featuredImage =
           PRODUCT_IMAGE_MAP[product.name].featuredImage;

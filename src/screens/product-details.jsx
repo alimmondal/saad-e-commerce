@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  Image,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Image, Pressable, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
 import BannerTitle from "../components/banner-title";
@@ -81,7 +74,7 @@ export default function Details({ navigation, route }) {
               marginVertical: spacing[6],
             }}
           >
-            <CounterButton setAmount={setAmount} />
+            <CounterButton amount={amount} setAmount={setAmount} />
             <Button
               title="Add to cart"
               style={{ marginLeft: spacing[4] }}
@@ -146,4 +139,4 @@ export default function Details({ navigation, route }) {
   );
 }
 
-const styles = StyleSheet.create({});
+// const styles = StyleSheet.create({});

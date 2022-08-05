@@ -26,7 +26,7 @@ export default function Headphone() {
   }, []);
 
   const onPressProduct = (id) => {
-    NavigationPreloadManager.navigate("Details", { id: id });
+    navigation.navigate("Details", { id: id });
   };
 
   return (
@@ -75,7 +75,7 @@ export default function Headphone() {
                   marginTop: spacing[4],
                 }}
                 title="SEE PRODUCT"
-                onPress={() => onPressProduct(headphone.id)}
+                onPress={() => onPressProduct(headphones.id)}
               />
             </View>
           );
