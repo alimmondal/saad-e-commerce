@@ -1,12 +1,14 @@
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { Image, Pressable, ScrollView, View } from "react-native";
+import { showMessage } from "react-native-flash-message";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
 import BannerTitle from "../components/banner-title";
 import Button from "../components/button";
 import CounterButton from "../components/CounterButton";
 import Text from "../components/text/text";
+import { addToCart } from "../store/cartSlice";
 import { selectProductById } from "../store/productSlice";
 import { colors } from "../themes/colors";
 import { spacing } from "../themes/spacing";
@@ -30,7 +32,30 @@ export default function Details({ navigation, route }) {
   const dispatch = useDispatch();
 
   const add = () => {
-    console.log("object");
+    if (amount === 0) {
+      return showMessage({
+        message: "You cannot add 0 items",
+        type: "danger",
+      });
+    }
+    //create cart product
+    const cartProduct = {
+      id,
+      name,
+      featuredImage,
+      price,
+      amount,
+      quantityPrice: price * amount,
+    };
+
+    // add the product to our cart to the store
+    dispatch(addToCart({ cartProduct }));
+
+    // show success message
+    showMessage({
+      message: "product added to cart successfully",
+      type: "success",
+    });
   };
 
   return (
@@ -143,7 +168,7 @@ export default function Details({ navigation, route }) {
                       borderRadius: 12,
                       height: 180,
                     }}
-                    resizeMethod="contain"
+                    resizeMode="contain"
                   />
                 </View>
               );
