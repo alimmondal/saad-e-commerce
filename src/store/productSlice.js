@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { DATA, PRODUCT_IMAGE_MAP } from "../data/product-image-map";
+import { DATA } from "../data/product-image-map";
 const initialState = {
   products: DATA,
   status: 'idle',
@@ -23,11 +23,11 @@ export const productSlice = createSlice({
     },
     [fetchProducts.fulfilled]: (state, action) => {
       const { payload } = action;
-      payload.products.forEach((product) => {
-        product.featuredImage =
-          PRODUCT_IMAGE_MAP[product.name].featuredImage;
-        product.images = PRODUCT_IMAGE_MAP[product.name].images;
-      });
+      // payload.products.forEach((product) => {
+      //   product.featuredImage =
+      //     PRODUCT_IMAGE_MAP[product.name].featuredImage;
+      //   product.images = PRODUCT_IMAGE_MAP[product.name].images;
+      // });
       
       state.status = 'success';
       state.products = payload.products;

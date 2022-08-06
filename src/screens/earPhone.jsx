@@ -33,7 +33,7 @@ export default function Earphone({ navigation }) {
   return (
     <ScrollView>
       <BannerTitle />
-      <CategoryTitle title="HEADPHONES" />
+      <CategoryTitle title="EARPHONES" />
       <View style={{ margin: spacing[5] }}>
         {earphones.map((earphone) => {
           return (

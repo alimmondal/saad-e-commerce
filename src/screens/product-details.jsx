@@ -1,10 +1,12 @@
+import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
-import { Image, Pressable, ScrollView, Text, View } from "react-native";
+import { Image, Pressable, ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
 import BannerTitle from "../components/banner-title";
 import Button from "../components/button";
 import CounterButton from "../components/CounterButton";
+import Text from "../components/text/text";
 import { selectProductById } from "../store/productSlice";
 import { colors } from "../themes/colors";
 import { spacing } from "../themes/spacing";
@@ -12,7 +14,7 @@ import { spacing } from "../themes/spacing";
 export default function Details({ navigation, route }) {
   const id = route.params.id;
   const product = useSelector((state) => selectProductById(state, id));
-  console.log("pd", product);
+  // console.log("pd", product);
   const {
     featuredImage,
     name,
@@ -21,6 +23,7 @@ export default function Details({ navigation, route }) {
     category,
     features,
     included,
+    includedItems,
     images,
   } = product;
   const [amount, setAmount] = useState(0);
@@ -35,12 +38,12 @@ export default function Details({ navigation, route }) {
       <ScrollView>
         <BannerTitle />
         <Pressable onPress={() => navigation.goBack()}>
-          {/* <Ionicons
+          <Ionicons
             name="arrow-back-sharp"
             size={24}
             color="black"
             style={{ margin: spacing[5] }}
-          /> */}
+          />
         </Pressable>
         <View style={{ margin: spacing[5] }}>
           <View
@@ -52,7 +55,10 @@ export default function Details({ navigation, route }) {
               paddingVertical: spacing[8],
             }}
           >
-            <Image source={featuredImage.source} />
+            <Image
+              source={featuredImage.source}
+              style={{ width: 172, height: 180 }}
+            />
           </View>
 
           <View style={{ paddingVertical: spacing[5] }}>
@@ -92,26 +98,26 @@ export default function Details({ navigation, route }) {
             </Text>
           </View>
 
-          {included && (
+          {includedItems && (
             <View style={{ marginVertical: spacing[5] }}>
               <Text preset="h4">IN THE BOX</Text>
-              {included.map((item) => {
+              {includedItems.map((item) => (
                 <View
                   key={item.name}
                   style={{
                     flexDirection: "row",
                     alignItems: "center",
-                    marginVertical: spacing[5],
+                    marginVertical: spacing[3],
                   }}
                 >
                   <Text preset="h6" textColor={colors.primary}>
-                    {item.amount}
+                    {item.amount}x
                   </Text>
                   <Text textColor="#7d7d7d" style={{ marginLeft: spacing[3] }}>
                     {item.name}
                   </Text>
-                </View>;
-              })}
+                </View>
+              ))}
             </View>
           )}
 
@@ -120,15 +126,24 @@ export default function Details({ navigation, route }) {
               return (
                 <View
                   key={index.toString()}
-                  style={{ marginVertical: spacing[3], overflow: "hidden" }}
+                  style={{
+                    marginVertical: spacing[3],
+                    overflow: "hidden",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor: colors.black,
+                    borderRadius: 4,
+                  }}
                 >
                   <Image
                     source={image.source}
                     style={{
                       alignItems: "center",
-                      width: "100%",
+                      width: 172,
                       borderRadius: 12,
+                      height: 180,
                     }}
+                    resizeMethod="contain"
                   />
                 </View>
               );
@@ -140,4 +155,9 @@ export default function Details({ navigation, route }) {
   );
 }
 
-// const styles = StyleSheet.create({});
+// const styles = StyleSheet.create({
+//   fImage: {
+//     width: 250,
+//     height: 100,
+//   },
+// });

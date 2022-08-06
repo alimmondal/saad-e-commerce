@@ -9,10 +9,8 @@ import {
   useWindowDimensions,
   View,
 } from "react-native";
-// import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
 import BannerTitle from "../components/banner-title";
-import Button from "../components/button";
 import Text from "../components/text/text";
 import {
   fetchProducts,
@@ -66,27 +64,20 @@ const CategoryBox = ({ title, image, onPress }) => {
   );
 };
 
-const FeaturedProduct = ({ name, image, category }) => {
+// const onPressProduct = (id) => {
+//   navigation.navigate("Details", { id: id });
+// };
+const FeaturedProduct = ({ name, image, category, onPress }) => {
   const { width, height } = useWindowDimensions();
   return (
-    <View
-      style={{
-        marginVertical: spacing[8],
-        backgroundColor: colors.primary,
-        borderRadius: spacing[4],
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
+    <Pressable onPress={onPress}>
       <View
         style={{
-          borderWidth: 1,
-          borderColor: "#d8d8d8",
-          borderRadius: 400,
-          height: 320,
-          width: width - 40,
-          justifyContent: "center",
+          marginVertical: spacing[8],
+          backgroundColor: colors.primary,
+          borderRadius: spacing[4],
           alignItems: "center",
+          justifyContent: "center",
         }}
       >
         <View
@@ -94,39 +85,74 @@ const FeaturedProduct = ({ name, image, category }) => {
             borderWidth: 1,
             borderColor: "#d8d8d8",
             borderRadius: 400,
-            height: 280,
-            width: width - 80,
+            height: 320,
+            width: width - 40,
             justifyContent: "center",
             alignItems: "center",
           }}
         >
-          <Image
-            source={image.source}
-            resizeMode="contain"
-            style={styles.imageView}
-          />
+          <View
+            style={{
+              borderWidth: 1,
+              borderColor: "#d8d8d8",
+              borderRadius: 400,
+              height: 280,
+              width: width - 80,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Image
+              source={image.source}
+              resizeMode="contain"
+              style={styles.imageView}
+            />
+          </View>
+        </View>
+
+        <View
+          style={{
+            paddingBottom: spacing[8],
+            marginTop: -spacing[7],
+          }}
+        >
+          <Text preset="h3" centered uppercase white>
+            {name}
+          </Text>
+          <Text
+            white
+            centered
+            style={{
+              width: 240,
+              marginTop: spacing[4],
+            }}
+          >
+            upgrade to premium speakers that are phenomenally build to deliver
+            truly remarkable sound
+          </Text>
+
+          <View
+            style={{
+              backgroundColor: colors.black,
+              alignSelf: "center",
+              marginTop: spacing[4],
+              padding: 12,
+              borderRadius: 4,
+            }}
+          >
+            <Text textColor="#fff">See Product</Text>
+          </View>
+          {/* <Button
+            title={"SEE PRODUCT"}
+            style={{
+              backgroundColor: colors.black,
+              alignSelf: "center",
+              marginTop: spacing[4],
+            }}
+          /> */}
         </View>
       </View>
-
-      <View style={{ paddingBottom: spacing[8], marginTop: -spacing[7] }}>
-        <Text preset="h3" centered uppercase white>
-          {name}
-        </Text>
-        <Text white centered style={{ width: 240, marginTop: spacing[4] }}>
-          upgrade to premium speakers that are phenomenally build to deliver
-          truly remarkable sound
-        </Text>
-
-        <Button
-          title={"SEE PRODUCT"}
-          style={{
-            backgroundColor: colors.black,
-            alignSelf: "center",
-            marginTop: spacing[4],
-          }}
-        />
-      </View>
-    </View>
+    </Pressable>
   );
 };
 
@@ -224,6 +250,9 @@ export default function Home({ navigation }) {
             name={product.name}
             category={product.category}
             image={product.featuredImage}
+            onPress={() => {
+              navigation.navigate("SpeakersTab");
+            }}
           />
         ))}
       </View>

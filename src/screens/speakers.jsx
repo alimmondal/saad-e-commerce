@@ -32,7 +32,7 @@ export default function Speakers({ navigation }) {
   return (
     <ScrollView>
       <BannerTitle />
-      <CategoryTitle title="HEADPHONES" />
+      <CategoryTitle title="SPEAKERS" />
       <View style={{ margin: spacing[5] }}>
         {speakers.map((speaker) => {
           return (
