@@ -3,7 +3,12 @@ import { Pressable, StyleSheet, View } from "react-native";
 import { colors } from "../themes/colors";
 import Text from "./text/text";
 
-export default function CounterButton({ style, amount, setAmount }) {
+export default function CounterButton({
+  style,
+  amount,
+  setAmount,
+  initialVal,
+}) {
   const onIncrement = () => {
     setAmount(amount + 1);
   };

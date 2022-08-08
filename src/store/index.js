@@ -23,6 +23,9 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const store = configureStore({
   reducer: persistedReducer,
+  // to ignore error
+  middleware: (getDefaultMiddleware) =>
+  getDefaultMiddleware({serializableCheck: false}), 
   
 });
 
