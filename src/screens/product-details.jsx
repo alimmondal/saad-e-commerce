@@ -115,6 +115,7 @@ export default function Details({ navigation, route }) {
           </View>
 
           <View style={{ marginVertical: spacing[4] }}>
+            <Text preset="h4">FEATURES</Text>
             <Text
               textColor="#7d7d7d"
               style={{ paddingTop: spacing[5], lineHeight: 25 }}

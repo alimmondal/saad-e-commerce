@@ -1,20 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Pressable, StyleSheet, View } from "react-native";
 import { colors } from "../themes/colors";
 import Text from "./text/text";
 
-export default function CounterButton({
-  style,
-  amount,
-  setAmount,
-  initialVal,
-}) {
+export default function CounterButton({ style, setAmount, initialVal }) {
+  const [count, setCount] = useState(initialVal || 0);
   const onIncrement = () => {
-    setAmount(amount + 1);
+    setCount((prev) => prev + 1);
+    setAmount(count + 1);
   };
   const onDecrement = () => {
-    if (amount > 0) {
-      setAmount(amount - 1);
+    if (count > 0) {
+      setCount((prev) => prev - 1);
+      setAmount(count - 1);
     }
   };
   return (
@@ -24,7 +22,7 @@ export default function CounterButton({
           -
         </Text>
       </Pressable>
-      <Text>{amount}</Text>
+      <Text textColor="#000">{count}</Text>
       <Pressable onPress={onIncrement} style={styles.counterBtn}>
         <Text style={styles.btnText} textColor="#000">
           +

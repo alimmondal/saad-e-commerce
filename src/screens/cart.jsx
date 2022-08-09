@@ -23,20 +23,18 @@ import { spacing } from "../themes/spacing";
 
 export default function Cart() {
   const cart = useSelector(selectCart);
-  console.log("c", cart);
   const totalAmount = useSelector(selectTotalAmount);
   const dispatch = useDispatch();
 
   const onAmountChange = (value, cartItem) => {
     if (value === 0) {
-      return Alert.alert(
-        "Remove item?",
-        "Do you really want to remove item from cart",
-        [
-          { text: "Cancel", style: "cancel", onPress: () => {} },
-          { text: "Remove", onPress: () => dispatch(deleteFromCart(cartItem)) },
-        ]
-      );
+      return Alert.alert("Remove item?", "Do you really want to remove?", [
+        { text: "Cancel", style: "cancel", onPress: () => {} },
+        {
+          text: "Remove",
+          onPress: () => dispatch(deleteFromCart({ id: cartItem.id })),
+        },
+      ]);
     }
   };
 
@@ -57,7 +55,7 @@ export default function Cart() {
                 textColor="#757575"
                 centered
                 style={{
-                  textDecoration: "underline",
+                  textDecorationLine: "underline",
                   fontWeight: "bold",
                 }}
               >
@@ -100,7 +98,7 @@ export default function Cart() {
                   </View>
 
                   <CounterButton
-                    amount={amount}
+                    initialVal={amount}
                     setAmount={(value) => {
                       onAmountChange(value, item);
                     }}
