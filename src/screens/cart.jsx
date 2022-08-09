@@ -9,10 +9,12 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
+import BannerTitle from "../components/banner-title";
 import Button from "../components/button";
 import CounterButton from "../components/CounterButton";
 import Text from "../components/text/text";
 import {
+  addToCart,
   deleteFromCart,
   reset,
   selectCart,
@@ -21,7 +23,7 @@ import {
 import { colors } from "../themes/colors";
 import { spacing } from "../themes/spacing";
 
-export default function Cart() {
+export default function Cart({ navigation }) {
   const cart = useSelector(selectCart);
   const totalAmount = useSelector(selectTotalAmount);
   const dispatch = useDispatch();
@@ -36,11 +38,20 @@ export default function Cart() {
         },
       ]);
     }
+
+    //update price on cart product
+    const cartProduct = {
+      ...cartItem,
+      quantityPrice: value * cartItem.price,
+      amount: value,
+    };
+    dispatch(addToCart({ cartProduct }));
   };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <BannerTitle />
         <View style={{ flex: 1, margin: spacing[5] }}>
           <View
             style={{

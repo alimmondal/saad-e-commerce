@@ -9,6 +9,7 @@ import {
   useWindowDimensions,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
 import BannerTitle from "../components/banner-title";
 import Text from "../components/text/text";
@@ -64,9 +65,6 @@ const CategoryBox = ({ title, image, onPress }) => {
   );
 };
 
-// const onPressProduct = (id) => {
-//   navigation.navigate("Details", { id: id });
-// };
 const FeaturedProduct = ({ name, image, category, onPress }) => {
   const { width, height } = useWindowDimensions();
   return (
@@ -184,80 +182,80 @@ export default function Home({ navigation }) {
   }
 
   return (
-    // <SafeAreaView>
-    <ScrollView>
-      <BannerTitle />
-      <View style={{ backgroundColor: colors.black }}>
-        <Image
-          source={require("../../assets/images/p3.png")}
-          style={{
-            alignSelf: "center",
-            width: "100%",
-            height: 500,
-          }}
-          resizeMode="contain"
-        />
-        <View
-          style={{
-            position: "absolute",
-            alignSelf: "center",
-            width: width - 20,
-            top: 130,
-          }}
-        >
-          <Text white preset="h3" centered>
-            WELCOME
-          </Text>
-          <Text centered style={{ color: "lightgrey", marginTop: 4 }}>
-            Experience natural, lifelike audio and exceptional build quality
-            made for the passionate music enthusiast.
-          </Text>
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView>
+        <BannerTitle />
+        <View style={{ backgroundColor: colors.black }}>
+          <Image
+            source={require("../../assets/images/p3.png")}
+            style={{
+              alignSelf: "center",
+              width: "100%",
+              height: 500,
+            }}
+            resizeMode="contain"
+          />
+          <View
+            style={{
+              position: "absolute",
+              alignSelf: "center",
+              width: width - 20,
+              top: 130,
+            }}
+          >
+            <Text white preset="h3" centered>
+              WELCOME
+            </Text>
+            <Text centered style={{ color: "lightgrey", marginTop: 4 }}>
+              Experience natural, lifelike audio and exceptional build quality
+              made for the passionate music enthusiast.
+            </Text>
+          </View>
         </View>
-      </View>
-      <View style={{ paddingVertical: spacing[8] }}>
-        <CategoryBox
-          title="HEADPHONES"
-          image={require("../../assets/images/p4.png")}
-          onPress={() => {
-            navigation.navigate("HeadphoneTab");
-          }}
-        />
-        <CategoryBox
-          title="SPEAKERS"
-          image={require("../../assets/images/s1.png")}
-          onPress={() => {
-            navigation.navigate("SpeakersTab");
-          }}
-        />
-        <CategoryBox
-          title="EARPHONES"
-          image={require("../../assets/images/e2.png")}
-          onPress={() => {
-            navigation.navigate("EarphoneTab");
-          }}
-        />
-      </View>
-
-      <View
-        style={{
-          paddingVertical: spacing[8],
-          paddingHorizontal: spacing[4],
-        }}
-      >
-        {featuredProducts.map((product) => (
-          <FeaturedProduct
-            key={product.id}
-            name={product.name}
-            category={product.category}
-            image={product.featuredImage}
+        <View style={{ paddingVertical: spacing[8] }}>
+          <CategoryBox
+            title="HEADPHONES"
+            image={require("../../assets/images/p4.png")}
+            onPress={() => {
+              navigation.navigate("HeadphoneTab");
+            }}
+          />
+          <CategoryBox
+            title="SPEAKERS"
+            image={require("../../assets/images/s1.png")}
             onPress={() => {
               navigation.navigate("SpeakersTab");
             }}
           />
-        ))}
-      </View>
-    </ScrollView>
-    //  </SafeAreaView>
+          <CategoryBox
+            title="EARPHONES"
+            image={require("../../assets/images/e2.png")}
+            onPress={() => {
+              navigation.navigate("EarphoneTab");
+            }}
+          />
+        </View>
+
+        <View
+          style={{
+            paddingVertical: spacing[8],
+            paddingHorizontal: spacing[4],
+          }}
+        >
+          {featuredProducts.map((product) => (
+            <FeaturedProduct
+              key={product.id}
+              name={product.name}
+              category={product.category}
+              image={product.featuredImage}
+              onPress={() => {
+                navigation.navigate("SpeakersTab");
+              }}
+            />
+          ))}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 

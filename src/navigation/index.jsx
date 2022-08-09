@@ -6,6 +6,7 @@ import {
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useSelector } from "react-redux";
 import Cart from "../screens/cart";
 import Checkout from "../screens/checkout";
 import Earphone from "../screens/earPhone";
@@ -13,6 +14,7 @@ import Headphone from "../screens/headphone";
 import Home from "../screens/home";
 import Details from "../screens/product-details";
 import Speakers from "../screens/speakers";
+import { selectCartLength } from "../store/cartSlice";
 import { colors } from "../themes/colors";
 
 const THEME = {
@@ -83,6 +85,7 @@ function TabBarIcon({ fontFamily, name, color }) {
 }
 
 export default function Navigation() {
+  const cartLength = useSelector(selectCartLength);
   return (
     <NavigationContainer theme={THEME}>
       <Tab.Navigator
@@ -152,6 +155,7 @@ export default function Navigation() {
             tabBarIcon: ({ color }) => (
               <TabBarIcon fontFamily={"Ionicons"} name="cart" color={color} />
             ),
+            tabBarBadge: cartLength > 0 ? cartLength : null,
           }}
         />
       </Tab.Navigator>
